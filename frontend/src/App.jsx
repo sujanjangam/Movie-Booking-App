@@ -1,18 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import MovieDetails from './pages/MovieDetails';
-import SeatSelection from './pages/SeatSelection';
-import BookingPage from './pages/BookingPage';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import AdminDashboard from './pages/AdminDashboard';
-import AdminMovieCreate from './pages/AdminMovieCreate';
-import AdminTheatreCreate from './pages/AdminTheatreCreate';
-import AdminShowCreate from './pages/AdminShowCreate';
-import Analytics from './pages/admin/Analytics.js';
+import { AuthProvider } from './context/AuthContext.jsx';
+import Navbar from './components/Navbar.jsx';
+import Home from './pages/Home.jsx';
+import MovieDetails from './pages/MovieDetails.jsx';
+import SeatSelection from './pages/SeatSelection.jsx';
+import BookingPage from './pages/BookingPage.jsx';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
+import AdminDashboard from './pages/AdminDashboard.jsx';
+import AdminMovieCreate from './pages/AdminMovieCreate.jsx';
+import AdminTheatreCreate from './pages/AdminTheatreCreate.jsx';
+import AdminShowCreate from './pages/AdminShowCreate.jsx';
+import Analytics from './pages/admin/Analytics.jsx';
 
 // Trigger fresh deployment
 function App() {
