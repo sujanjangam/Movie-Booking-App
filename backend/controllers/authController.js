@@ -11,9 +11,11 @@ export const registerUser = async (req, res) => {
     const user = await User.create({ name, email, password });
 
     res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
       token: generateToken(user._id),
     });
   } catch (error) {
@@ -28,7 +30,11 @@ export const loginUser = async (req, res) => {
 
   if (user && (await user.matchPassword(password))) {
     res.json({
-      _id: user._id,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+      },
       token: generateToken(user._id),
     });
   } else {

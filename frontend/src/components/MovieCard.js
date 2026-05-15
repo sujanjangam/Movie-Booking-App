@@ -9,8 +9,8 @@ const MovieCard = ({ movie }) => {
       <img src={movie.poster} alt={movie.title} className="movie-poster" />
       <div className="movie-info">
         <h3>{movie.title}</h3>
-        <p>{movie.genre}</p>
-        <p>{movie.duration} mins</p>
+        <p>{movie.language}</p>
+        <p>{movie.duration}</p>
       </div>
     </div>
   );
