@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
 
-const socket = io(process.env.REACT_APP_API_URL || "http://localhost:5000");
+const socket = io(import.meta.env.VITE_API_URL || "https://movie-booking-api-r4nm.onrender.com");
 
 export default socket;
