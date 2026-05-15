@@ -14,6 +14,7 @@ import AdminTheatreCreate from './pages/AdminTheatreCreate';
 import AdminShowCreate from './pages/AdminShowCreate';
 import Analytics from './pages/admin/Analytics';
 
+// Trigger fresh deployment
 function App() {
   return (
     <AuthProvider>
