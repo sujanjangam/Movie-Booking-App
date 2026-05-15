@@ -12,7 +12,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminMovieCreate from './pages/AdminMovieCreate';
 import AdminTheatreCreate from './pages/AdminTheatreCreate';
 import AdminShowCreate from './pages/AdminShowCreate';
-import Analytics from './pages/admin/Analytics';
+import Analytics from './pages/admin/Analytics.js';
 
 // Trigger fresh deployment
 function App() {
