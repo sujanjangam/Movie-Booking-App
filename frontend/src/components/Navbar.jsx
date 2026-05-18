@@ -29,7 +29,7 @@ const Navbar = () => {
               )}
               <Link to="/booking" className="navbar-link">My Bookings</Link>
               <span className="navbar-link" style={{ opacity: 0.7 }}>
-                👤 {user.name} ({user.role})
+                👤 {user.name} {user.role && `(${user.role})`}
               </span>
               <button onClick={handleLogout} className="navbar-btn">
                 Logout
