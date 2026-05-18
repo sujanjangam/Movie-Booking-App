@@ -13,7 +13,7 @@ const BookingPage = () => {
   const fetchBookings = async () => {
     try {
       const token = localStorage.getItem('token');
-      const { data } = await axios.get('/bookings', {
+      const { data } = await axios.get('/bookings/user', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBookings(data);
