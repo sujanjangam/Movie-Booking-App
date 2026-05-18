@@ -52,7 +52,7 @@ const SeatSelection = () => {
   };
 
   const handleSeatClick = async (seat) => {
-    if (seat.status === 'booked' || seat.status === 'locked') return;
+    if (seat.status === 'booked') return;
 
     const isSelected = selectedSeats.includes(seat.number);
     
@@ -62,7 +62,6 @@ const SeatSelection = () => {
       const newSelected = [...selectedSeats, seat.number];
       setSelectedSeats(newSelected);
       
-      // Lock seats
       try {
         const token = localStorage.getItem('token');
         const response = await axios.post('/shows/lock', {
@@ -76,6 +75,7 @@ const SeatSelection = () => {
         fetchShowDetails();
       } catch (error) {
         console.error('Error locking seats:', error);
+        setSelectedSeats(selectedSeats);
         alert(error.response?.data?.message || 'Failed to lock seats');
       }
     }

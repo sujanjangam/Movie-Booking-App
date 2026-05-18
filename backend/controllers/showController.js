@@ -111,18 +111,21 @@ export const lockSeats = async (req, res) => {
 
     for (let seat of show.seats) {
       if (seats.includes(seat.number)) {
-        if (
-          seat.status === "booked" ||
-          (seat.status === "locked" && seat.lockExpiry > now)
-        ) {
+        if (seat.status === "booked") {
           return res.status(400).json({
-            message: `Seat ${seat.number} not available`,
+            message: `Seat ${seat.number} is already booked`,
+          });
+        }
+        
+        if (seat.status === "locked" && seat.lockExpiry > now && seat.lockedBy.toString() !== req.user._id.toString()) {
+          return res.status(400).json({
+            message: `Seat ${seat.number} is locked by another user`,
           });
         }
 
         seat.status = "locked";
         seat.lockedBy = req.user._id;
-        seat.lockExpiry = new Date(now.getTime() + 5 * 60 * 1000); // 5 min
+        seat.lockExpiry = new Date(now.getTime() + 5 * 60 * 1000);
         calculatedPrice += seat.price;
       }
     }
