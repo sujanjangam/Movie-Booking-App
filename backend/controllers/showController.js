@@ -160,24 +160,32 @@ export const confirmBooking = async (req, res) => {
       if (seats.includes(seat.number)) {
         if (
           seat.status !== "locked" ||
+          !seat.lockedBy ||
           seat.lockedBy.toString() !== req.user._id.toString() ||
           seat.lockExpiry < now
         ) {
           return res.status(400).json({
-            message: `Seat ${seat.number} lock expired`,
+            message: `Seat ${seat.number} lock expired or not locked by you`,
           });
         }
 
-        seat.status = "booked";
         const seatPrice = Number(seat.price) || Number(show.price) || 100;
+        console.log(`Seat ${seat.number}: price=${seat.price}, show.price=${show.price}, calculated=${seatPrice}`);
+        
+        seat.status = "booked";
         calculatedPrice += seatPrice;
         seat.lockedBy = null;
         seat.lockExpiry = null;
       }
     }
 
-    if (!calculatedPrice || isNaN(calculatedPrice)) {
-      return res.status(400).json({ message: "Invalid price calculation" });
+    console.log(`Total calculated price: ${calculatedPrice}`);
+
+    if (!calculatedPrice || isNaN(calculatedPrice) || calculatedPrice <= 0) {
+      return res.status(400).json({ 
+        message: "Invalid price calculation",
+        debug: { calculatedPrice, showPrice: show.price, seatsCount: seats.length }
+      });
     }
 
     await show.save();
@@ -196,6 +204,7 @@ export const confirmBooking = async (req, res) => {
 
     res.json(booking);
   } catch (error) {
+    console.error('Booking error:', error);
     res.status(500).json({ message: error.message });
   }
 };
