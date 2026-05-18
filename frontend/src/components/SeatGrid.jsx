@@ -61,7 +61,7 @@ const SeatGrid = ({ showId, token }) => {
     try {
       await axios.post(
         "/shows/book",
-        { showId, seats: selected, totalPrice: selected.length * 150 },
+        { showId, seats: selected },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       alert("Booking confirmed!");
