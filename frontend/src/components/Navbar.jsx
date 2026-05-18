@@ -24,7 +24,7 @@ const Navbar = () => {
           
           {user ? (
             <>
-              {(user.role === 'TENANT_ADMIN' || user.role === 'SUPER_ADMIN' || user.role === 'QA_ADMIN') && (
+              {(user.role === 'TENANT_ADMIN' || user.role === 'SUPER_ADMIN') && (
                 <Link to="/admin" className="navbar-link">Dashboard</Link>
               )}
               <Link to="/booking" className="navbar-link">My Bookings</Link>

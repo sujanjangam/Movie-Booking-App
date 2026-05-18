@@ -22,7 +22,7 @@ const Login = () => {
       login(data.user, data.token);
 
       // Redirect based on role
-      if (data.user.role === 'TENANT_ADMIN' || data.user.role === 'SUPER_ADMIN' || data.user.role === 'QA_ADMIN') {
+      if (data.user.role === 'TENANT_ADMIN' || data.user.role === 'SUPER_ADMIN') {
         navigate('/admin');
       } else {
         navigate('/');

@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get("/", protect, getMovies);
 router.get("/:id", protect, getMovieById);
-router.post("/", protect, authorizeRoles("TENANT_ADMIN"), addMovie);
+router.post("/", protect, authorizeRoles("TENANT_ADMIN", "SUPER_ADMIN"), addMovie);
 
 export default router;

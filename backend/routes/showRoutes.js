@@ -12,14 +12,14 @@ import { protect, authorizeRoles } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", protect, authorizeRoles("TENANT_ADMIN"), createShow);
+router.post("/", protect, authorizeRoles("TENANT_ADMIN", "SUPER_ADMIN"), createShow);
 
 router.get("/", protect, getAllShows);
 router.get("/movie/:movieId", protect, getShowsByMovie);
 router.get("/:id", protect, getShowById);
 router.get("/:id/seats", protect, getShowSeats);
 
-router.post("/lock", protect, authorizeRoles("USER"), lockSeats);
-router.post("/book", protect, authorizeRoles("USER"), confirmBooking);
+router.post("/lock", protect, lockSeats);
+router.post("/book", protect, confirmBooking);
 
 export default router;

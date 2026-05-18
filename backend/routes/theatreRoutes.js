@@ -5,8 +5,8 @@ import { protect, authorizeRoles } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.get("/", protect, getTheatres);
-router.post("/", protect, authorizeRoles("TENANT_ADMIN"), createTheatre);
-router.post("/:theatreId/screens", protect, authorizeRoles("TENANT_ADMIN"), addScreen);
+router.post("/", protect, authorizeRoles("TENANT_ADMIN", "SUPER_ADMIN"), createTheatre);
+router.post("/:theatreId/screens", protect, authorizeRoles("TENANT_ADMIN", "SUPER_ADMIN"), addScreen);
 router.get("/:theatreId/screens", protect, getTheatreScreens);
 
 export default router;
