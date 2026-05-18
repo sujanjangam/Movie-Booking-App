@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext.jsx';
 import axios from '../api/axios';
 import '../styles/realtime.css';
 
@@ -8,6 +9,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,14 +19,10 @@ const Login = () => {
     try {
       const { data } = await axios.post('/auth/login', credentials);
       
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-      
-      // Set axios default header
-      axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+      login(data.user, data.token);
 
       // Redirect based on role
-      if (data.user.role === 'TENANT_ADMIN' || data.user.role === 'SUPER_ADMIN') {
+      if (data.user.role === 'TENANT_ADMIN' || data.user.role === 'SUPER_ADMIN' || data.user.role === 'QA_ADMIN') {
         navigate('/admin');
       } else {
         navigate('/');
