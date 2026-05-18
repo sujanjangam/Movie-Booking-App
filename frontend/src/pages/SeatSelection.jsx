@@ -86,12 +86,10 @@ const SeatSelection = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const totalPrice = selectedSeats.length * (show?.price || 250);
       
       await axios.post('/shows/book', {
         showId,
-        seats: selectedSeats,
-        totalPrice
+        seats: selectedSeats
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
