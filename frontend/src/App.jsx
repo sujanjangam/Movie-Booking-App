@@ -14,7 +14,7 @@ import AdminTheatreCreate from './pages/AdminTheatreCreate.jsx';
 import AdminShowCreate from './pages/AdminShowCreate.jsx';
 import Analytics from './pages/admin/Analytics.jsx';
 
-// Force Vercel redeployment - totalPrice fix
+// Trigger Vercel deployment - Admin dashboard update
 function App() {
   return (
     <AuthProvider>
