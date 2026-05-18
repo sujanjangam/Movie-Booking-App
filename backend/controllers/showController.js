@@ -126,7 +126,8 @@ export const lockSeats = async (req, res) => {
         seat.status = "locked";
         seat.lockedBy = req.user._id;
         seat.lockExpiry = new Date(now.getTime() + 5 * 60 * 1000);
-        calculatedPrice += seat.price;
+        const seatPrice = Number(seat.price) || Number(show.price) || 100;
+        calculatedPrice += seatPrice;
       }
     }
 
@@ -168,10 +169,15 @@ export const confirmBooking = async (req, res) => {
         }
 
         seat.status = "booked";
-        calculatedPrice += seat.price;
+        const seatPrice = Number(seat.price) || Number(show.price) || 100;
+        calculatedPrice += seatPrice;
         seat.lockedBy = null;
         seat.lockExpiry = null;
       }
+    }
+
+    if (!calculatedPrice || isNaN(calculatedPrice)) {
+      return res.status(400).json({ message: "Invalid price calculation" });
     }
 
     await show.save();
