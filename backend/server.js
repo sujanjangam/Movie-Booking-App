@@ -34,7 +34,17 @@ app.use("/api/tenants", tenantRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
 app.get("/", (req, res) => {
-  res.send("API Running");
+  res.json({
+    message: "API Running",
+    version: "2.0.0",
+    lastUpdate: "2024-05-18",
+    features: [
+      "Role-based auth",
+      "Tenant isolation",
+      "Seat booking",
+      "Admin dashboard"
+    ]
+  });
 });
 
 const PORT = process.env.PORT || 5000;
