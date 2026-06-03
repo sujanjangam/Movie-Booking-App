@@ -28,7 +28,7 @@ const Navbar = () => {
                 <Link to="/admin" className="navbar-link">Dashboard</Link>
               )}
               <Link to="/booking" className="navbar-link">My Bookings</Link>
-              <span className="navbar-link" style={{ opacity: 0.7 }}>
+              <span className="navbar-link navbar-user">
                 👤 {user.name} {user.role && `(${user.role})`}
               </span>
               <button onClick={handleLogout} className="navbar-btn">

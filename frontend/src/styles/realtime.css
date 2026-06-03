@@ -755,3 +755,9 @@ body {
     opacity: 1;
   }
 }
+
+/* Navbar user display */
+.navbar-user {
+  opacity: 0.7;
+  cursor: default;
+}

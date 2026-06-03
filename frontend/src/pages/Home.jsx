@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import '../styles/realtime.css';
+import '../styles/Home.css';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -49,9 +50,8 @@ const Home = () => {
             {movies.map((movie, index) => (
               <div
                 key={movie._id}
-                className="movie-card"
+                className={`movie-card delay-${index}`}
                 onClick={() => navigate(`/movie/${movie._id}`)}
-                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <img
                   src={movie.poster || 'https://via.placeholder.com/250x350?text=Movie+Poster'}
@@ -71,7 +71,7 @@ const Home = () => {
           </div>
 
           {movies.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '4rem', color: 'rgba(255,255,255,0.5)' }}>
+            <div className="no-movies-placeholder">
               <h3>No movies available</h3>
               <p>Check back soon for new releases!</p>
             </div>

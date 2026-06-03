@@ -48,8 +48,7 @@ const BookingPage = () => {
             {bookings.map((booking, index) => (
               <div
                 key={booking._id}
-                className="booking-card"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className={`booking-card delay-${index}`}
               >
                 <div className="booking-card-top">
                   <div>
