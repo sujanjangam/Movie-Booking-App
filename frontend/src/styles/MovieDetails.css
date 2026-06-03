@@ -1,0 +1,138 @@
+.movie-details-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 3rem;
+  margin-bottom: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.movie-details-body {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.movie-details-poster {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.movie-details-info {
+  flex: 1;
+}
+
+.movie-details-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.movie-details-meta {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.movie-details-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2rem;
+}
+
+.movie-details-genres {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.genre-tag {
+  padding: 0.5rem 1rem;
+  background: rgba(229, 9, 20, 0.2);
+  border-radius: 20px;
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  color: white;
+}
+
+.shows-section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.no-shows-placeholder {
+  text-align: center;
+  padding: 4rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.theatre-shows-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theatre-shows-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.show-times-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.show-time-btn {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, rgba(229, 9, 20, 0.2) 0%, rgba(229, 9, 20, 0.1) 100%);
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  border-radius: 12px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.show-time-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4);
+}
+
+.show-time-price {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.3rem;
+}
+
+@media (max-width: 768px) {
+  .movie-details-body {
+    flex-direction: column;
+  }
+
+  .movie-details-poster {
+    width: 100%;
+    height: 300px;
+  }
+
+  .movie-details-title {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,84 @@
+.admin-dashboard-page {
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.admin-dashboard-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-dashboard-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.admin-dashboard-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.admin-dashboard-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.admin-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.admin-nav-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: block;
+}
+
+.admin-nav-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.admin-nav-card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.admin-nav-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.admin-nav-card-desc {
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.admin-tip-banner {
+  background: rgba(70, 211, 105, 0.1);
+  border: 1px solid rgba(70, 211, 105, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: var(--success);
+  text-align: center;
+}
+
+.admin-tip-banner p {
+  margin: 0;
+  font-size: 1rem;
+}
