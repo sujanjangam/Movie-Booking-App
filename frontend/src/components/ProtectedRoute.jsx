@@ -1,17 +1,16 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import "../styles/ProtectedRoute.css";
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-  if (!token) {
-    return <Navigate to="/login" />;
-  }
+  if (!token) return <Navigate to="/login" />;
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
     return (
-      <div style={{ padding: "50px", textAlign: "center" }}>
+      <div className="access-denied">
         <h2>Access Denied</h2>
         <p>You don't have permission to access this page.</p>
       </div>
