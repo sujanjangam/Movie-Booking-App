@@ -137,7 +137,10 @@ const SeatSelection = () => {
   }
 
   const seatRows = groupSeatsByRow();
-  const totalPrice = selectedSeats.length * (show?.price || 250);
+  const totalPrice = selectedSeats.reduce((sum, seatNum) => {
+    const seat = seats.find(s => s.number === seatNum);
+    return sum + (seat?.price || show?.price || 250);
+  }, 0);
 
   return (
     <>

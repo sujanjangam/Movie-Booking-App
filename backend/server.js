@@ -4,6 +4,7 @@ import cors from "cors";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import connectDB from "./config/db.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import movieRoutes from "./routes/movieRoutes.js";
@@ -18,8 +19,12 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(",")
+  : ["http://localhost:5173", "http://localhost:3000"];
+
 app.use(cors({
-  origin: "*",
+  origin: process.env.NODE_ENV === "production" ? allowedOrigins : "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
@@ -37,15 +42,12 @@ app.get("/", (req, res) => {
   res.json({
     message: "API Running",
     version: "2.0.0",
-    lastUpdate: "2024-05-18",
-    features: [
-      "Role-based auth",
-      "Tenant isolation",
-      "Seat booking",
-      "Admin dashboard"
-    ]
+    features: ["Role-based auth", "Tenant isolation", "Seat booking", "Admin dashboard"]
   });
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
@@ -61,7 +63,6 @@ io.on("connection", (socket) => {
 
   socket.on("joinShow", (showId) => {
     socket.join(showId);
-    console.log(`User ${socket.id} joined show ${showId}`);
   });
 
   socket.on("disconnect", () => {

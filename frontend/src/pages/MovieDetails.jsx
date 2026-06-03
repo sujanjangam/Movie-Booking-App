@@ -26,7 +26,7 @@ const MovieDetails = () => {
 
   const fetchShows = async () => {
     try {
-      const { data } = await axios.get(`/shows?movie=${id}`);
+      const { data } = await axios.get(`/shows/movie/${id}`);
       setShows(data);
     } catch (error) {
       console.error('Error fetching shows:', error);

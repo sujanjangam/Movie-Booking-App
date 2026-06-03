@@ -4,6 +4,6 @@ import { protect, authorizeRoles } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", protect, authorizeRoles("TENANT_ADMIN"), getDashboardStats);
+router.get("/", protect, authorizeRoles("TENANT_ADMIN", "SUPER_ADMIN"), getDashboardStats);
 
 export default router;
