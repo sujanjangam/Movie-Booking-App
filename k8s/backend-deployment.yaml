@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-backend
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: movie-backend
+  template:
+    metadata:
+      labels:
+        app: movie-backend
+    spec:
+      containers:
+      - name: backend
+        image: movie-booking-app-backend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        env:
+        - name: PORT
+          value: "5000"
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: movie-secrets
+              key: mongo-uri
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: movie-secrets
+              key: jwt-secret

@@ -1,12 +1,38 @@
 services:
-  backend:
+  backend1:
     build:
       context: ./backend
-    container_name: movie_backend
-    ports:
-      - "5000:5000"
+    container_name: movie_backend1
     env_file:
       - ./backend/.env
+    restart: unless-stopped
+
+  backend2:
+    build:
+      context: ./backend
+    container_name: movie_backend2
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+
+  backend3:
+    build:
+      context: ./backend
+    container_name: movie_backend3
+    env_file:
+      - ./backend/.env
+    restart: unless-stopped
+
+  nginx:
+    build:
+      context: ./nginx
+    container_name: movie_nginx_lb
+    ports:
+      - "5000:80"
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
     restart: unless-stopped
 
   frontend:
@@ -16,5 +42,5 @@ services:
     ports:
       - "5173:5173"
     depends_on:
-      - backend
+      - nginx
     restart: unless-stopped
