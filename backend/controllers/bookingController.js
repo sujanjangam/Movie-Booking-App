@@ -1,5 +1,6 @@
 import Booking from "../models/Booking.js";
 import Show from "../models/Show.js";
+import QRCode from "qrcode";
 
 export const createBooking = async (req, res) => {
   try {
@@ -37,6 +38,16 @@ export const createBooking = async (req, res) => {
       seats,
       totalPrice: totalPrice || seats.length * show.price,
     });
+
+    const qrData = JSON.stringify({
+      bookingId: booking._id,
+      seats: booking.seats,
+      showId: booking.show,
+      userId: booking.user
+    });
+    const qrCode = await QRCode.toDataURL(qrData);
+    booking.qrCode = qrCode;
+    await booking.save();
 
     const populatedBooking = await Booking.findById(booking._id)
       .populate({

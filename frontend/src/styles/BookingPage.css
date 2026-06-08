@@ -127,3 +127,20 @@
 .delay-7  { animation-delay: 0.7s; }
 .delay-8  { animation-delay: 0.8s; }
 .delay-9  { animation-delay: 0.9s; }
+
+.booking-qr-section {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.booking-qr-code {
+  width: 200px;
+  height: 200px;
+  margin-top: 1rem;
+  border-radius: 8px;
+  background: white;
+  padding: 10px;
+}

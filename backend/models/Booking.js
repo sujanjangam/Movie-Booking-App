@@ -6,6 +6,7 @@ const bookingSchema = new mongoose.Schema(
     show: { type: mongoose.Schema.Types.ObjectId, ref: "Show" },
     seats: [String],
     totalPrice: Number,
+    qrCode: String,
     tenantId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Tenant",

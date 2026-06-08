@@ -86,6 +86,13 @@ const BookingPage = () => {
                   </div>
                 </div>
 
+                {booking.qrCode && (
+                  <div className="booking-qr-section">
+                    <p className="booking-detail-label">Scan QR Code at Theatre</p>
+                    <img src={booking.qrCode} alt="Booking QR Code" className="booking-qr-code" />
+                  </div>
+                )}
+
                 <div className="booking-confirm-banner">
                   🎉 Booking confirmed! Show this at the theatre entrance
                 </div>
