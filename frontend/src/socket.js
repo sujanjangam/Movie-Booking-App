@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
 
-const socket = io("https://movie-booking-api-r4nm.onrender.com");
+const socket = io("http://51.21.199.212:5000");
 
 export default socket;

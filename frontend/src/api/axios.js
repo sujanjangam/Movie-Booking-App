@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://movie-booking-api-r4nm.onrender.com/api',
+  baseURL: 'http://51.21.199.212:5000/api',
   headers: {
     'Content-Type': 'application/json',
   },
