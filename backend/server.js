@@ -13,6 +13,9 @@ import showRoutes from "./routes/showRoutes.js";
 import theatreRoutes from "./routes/theatreRoutes.js";
 import tenantRoutes from "./routes/tenantRoutes.js";
 import analyticsRoutes from "./routes/analyticsRoutes.js";
+import offerRoutes from "./routes/offerRoutes.js";
+import foodRoutes from "./routes/foodRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -37,12 +40,25 @@ app.use("/api/shows", showRoutes);
 app.use("/api/theatres", theatreRoutes);
 app.use("/api/tenants", tenantRoutes);
 app.use("/api/analytics", analyticsRoutes);
+app.use("/api/offers", offerRoutes);
+app.use("/api/food", foodRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 app.get("/", (req, res) => {
   res.json({
     message: "API Running",
-    version: "2.0.0",
-    features: ["Role-based auth", "Tenant isolation", "Seat booking", "Admin dashboard"]
+    version: "3.0.0",
+    features: [
+      "Role-based auth",
+      "Tenant isolation",
+      "Seat booking",
+      "Admin dashboard",
+      "Food & Beverage",
+      "Offers & Coupons",
+      "Reviews & Ratings",
+      "Multi-language Support",
+      "Multiple Formats (2D/3D/IMAX/4DX)"
+    ]
   });
 });
 

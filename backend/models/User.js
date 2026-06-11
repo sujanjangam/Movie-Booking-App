@@ -3,16 +3,40 @@ import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
   {
-    name: String,
-    email: { type: String, unique: true },
-    password: String,
-
+    name: {
+      type: String,
+      required: true
+    },
+    email: { 
+      type: String, 
+      unique: true,
+      required: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    phone: {
+      type: String,
+      default: ""
+    },
+    city: {
+      type: String,
+      default: "Bangalore"
+    },
+    preferredLanguages: {
+      type: [String],
+      default: ["English"]
+    },
+    preferredGenres: {
+      type: [String],
+      default: []
+    },
     role: {
       type: String,
       enum: ["SUPER_ADMIN", "TENANT_ADMIN", "QA_ADMIN", "USER"],
       default: "USER",
     },
-
     tenantId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Tenant",
