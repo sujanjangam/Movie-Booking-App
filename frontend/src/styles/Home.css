@@ -1,7 +1,15 @@
 .no-movies-placeholder {
   text-align: center;
   padding: 4rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: #6b7280;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.no-movies-placeholder h3 {
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
 }
 
 /* Staggered card animation delays */
