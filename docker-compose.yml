@@ -1,46 +1,19 @@
+version: '3.8'
+
 services:
-  backend1:
-    build:
-      context: ./backend
-    container_name: movie_backend1
-    env_file:
-      - ./backend/.env
-    restart: unless-stopped
-
-  backend2:
-    build:
-      context: ./backend
-    container_name: movie_backend2
-    env_file:
-      - ./backend/.env
-    restart: unless-stopped
-
-  backend3:
-    build:
-      context: ./backend
-    container_name: movie_backend3
-    env_file:
-      - ./backend/.env
-    restart: unless-stopped
-
-  nginx:
-    build:
-      context: ./nginx
-    container_name: movie_nginx_lb
+  backend:
+    build: ./backend
     ports:
-      - "5000:80"
+      - "5000:5000"
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - REDIS_URL=redis://redis:6379
     depends_on:
-      - backend1
-      - backend2
-      - backend3
-    restart: unless-stopped
+      - redis
 
-  frontend:
-    build:
-      context: ./frontend
-    container_name: movie_frontend
+  redis:
+    image: redis:latest
     ports:
-      - "5173:5173"
-    depends_on:
-      - nginx
-    restart: unless-stopped
+      - "6379:6379"
+    restart: always

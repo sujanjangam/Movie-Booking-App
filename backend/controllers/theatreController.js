@@ -2,10 +2,45 @@ import Theatre from "../models/Theatre.js";
 
 export const getTheatres = async (req, res) => {
   try {
-    const theatres = await Theatre.find({
-      tenantId: req.user.tenantId,
-    });
+    const { city } = req.query;
+    const query = { tenantId: req.user.tenantId };
+    
+    if (city) {
+      query.city = city;
+    }
+    
+    const theatres = await Theatre.find(query).sort({ name: 1 });
     res.json(theatres);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Get all cities
+export const getCities = async (req, res) => {
+  try {
+    const cities = await Theatre.distinct("city", { 
+      tenantId: req.user.tenantId 
+    });
+    res.json(cities.sort());
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Get theatre by ID
+export const getTheatreById = async (req, res) => {
+  try {
+    const theatre = await Theatre.findOne({
+      _id: req.params.id,
+      tenantId: req.user.tenantId
+    });
+    
+    if (!theatre) {
+      return res.status(404).json({ message: "Theatre not found" });
+    }
+    
+    res.json(theatre);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

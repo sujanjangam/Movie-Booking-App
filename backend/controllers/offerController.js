@@ -116,3 +116,43 @@ export const getAllOffers = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Update offer (Admin)
+export const updateOffer = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const tenantId = req.user.tenantId;
+
+    const offer = await Offer.findOneAndUpdate(
+      { _id: id, tenantId },
+      req.body,
+      { new: true }
+    );
+
+    if (!offer) {
+      return res.status(404).json({ message: "Offer not found" });
+    }
+
+    res.json(offer);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Delete offer (Admin)
+export const deleteOffer = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const tenantId = req.user.tenantId;
+
+    const offer = await Offer.findOneAndDelete({ _id: id, tenantId });
+
+    if (!offer) {
+      return res.status(404).json({ message: "Offer not found" });
+    }
+
+    res.json({ message: "Offer deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

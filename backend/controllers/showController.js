@@ -2,6 +2,7 @@ import Show from "../models/Show.js";
 import Theatre from "../models/Theatre.js";
 import Booking from "../models/Booking.js";
 import generateSeats from "../utils/generateSeats.js";
+import redisClient from "../config/redis.js";
 
 export const createShow = async (req, res) => {
   const { movie, theatre, screen, time, date, price } = req.body;
@@ -65,12 +66,27 @@ export const getShowById = async (req, res) => {
 
 export const getAllShows = async (req, res) => {
   try {
-    const shows = await Show.find({
-      tenantId: req.user.tenantId,
-    })
+    const { city, movieId, date } = req.query;
+    const query = { tenantId: req.user.tenantId };
+    
+    if (movieId) {
+      query.movie = movieId;
+    }
+    
+    if (date) {
+      query.date = date;
+    }
+    
+    let shows = await Show.find(query)
       .populate("movie")
       .populate("theatre")
       .sort({ date: 1, time: 1 });
+    
+    // Filter by city if provided
+    if (city) {
+      shows = shows.filter(show => show.theatre?.city === city);
+    }
+    
     res.json(shows);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -85,12 +101,23 @@ export const getShowSeats = async (req, res) => {
       return res.status(404).json({ message: "Show not found" });
     }
 
-    // tenant safety
     if (show.tenantId && req.user && show.tenantId.toString() !== req.user.tenantId.toString()) {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    res.json({ show, seats: show.seats });
+    // Check Redis locks for seat availability
+    const seatsWithLockStatus = await Promise.all(
+      show.seats.map(async (seat) => {
+        const key = `seat:${show._id}:${seat.number}`;
+        const locked = await redisClient.exists(key);
+        return {
+          ...seat.toObject(),
+          available: !locked && seat.status === "available"
+        };
+      })
+    );
+
+    res.json({ show, seats: seatsWithLockStatus });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

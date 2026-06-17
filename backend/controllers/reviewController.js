@@ -1,5 +1,6 @@
 import Review from "../models/Review.js";
 import Movie from "../models/Movie.js";
+import Booking from "../models/Booking.js";
 
 // Create or update review
 export const createReview = async (req, res) => {
@@ -8,6 +9,13 @@ export const createReview = async (req, res) => {
     const userId = req.user._id;
     const tenantId = req.user.tenantId;
 
+    // Check if user has booked this movie (for verified badge)
+    const hasBooking = await Booking.findOne({
+      user: userId,
+      movie: movieId,
+      bookingStatus: "CONFIRMED"
+    });
+
     // Check if user already reviewed this movie
     let existingReview = await Review.findOne({ user: userId, movie: movieId });
 
@@ -15,7 +23,9 @@ export const createReview = async (req, res) => {
       existingReview.rating = rating;
       existingReview.title = title;
       existingReview.review = review;
+      existingReview.verified = !!hasBooking;
       await existingReview.save();
+      await updateMovieRating(movieId);
       return res.json(existingReview);
     }
 
@@ -25,6 +35,7 @@ export const createReview = async (req, res) => {
       rating,
       title,
       review,
+      verified: !!hasBooking,
       tenantId
     });
 
